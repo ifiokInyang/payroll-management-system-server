@@ -31,10 +31,10 @@ export class User {
   @Column()
   salary: string;
 
-  @Column()
+  @Column({ nullable: true })
   status: string;
 
-  @Column()
+  @Column({ default: true })
   isActiveStaff: boolean;
 
   @Column()
