@@ -1,10 +1,7 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-// const value = uuidv4()
 @Entity({ name: 'users' })
 export class User {
-  //   public value = uuidv4() as string;
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
