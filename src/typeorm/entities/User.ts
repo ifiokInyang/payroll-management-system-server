@@ -13,6 +13,7 @@ export class User {
 
   @Column({
     default: 'employee',
+    select: false,
   })
   password: string;
 

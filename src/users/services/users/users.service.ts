@@ -10,8 +10,8 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
   async getAllUsers() {
-    const users = await this.userRepository.findAndCount();
-    return users;
+    const allUsers = await this.userRepository.find();
+    return allUsers;
   }
 
   async getUserById(id: string) {
@@ -41,7 +41,9 @@ export class UsersService {
       ...userInput,
       createdAt: new Date(),
     });
-    return await this.userRepository.save(newUser);
+    const savedUser = await this.userRepository.save(newUser);
+    const { password, ...newlySavedUser } = savedUser;
+    return newlySavedUser;
   }
 
   async updateUser(id: string, updateDetails: UpdateUserDetails) {
@@ -50,6 +52,11 @@ export class UsersService {
         id,
       },
     });
+    if (!isEmail)
+      throw new HttpException(
+        'user does not exist on our records',
+        HttpStatus.BAD_REQUEST,
+      );
     if (isEmail.email === updateDetails.email) {
       throw new HttpException(
         'this email already exist',
