@@ -29,7 +29,7 @@ export class User {
   @Column()
   salary: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: 'paid' })
   status: string;
 
   @Column({ default: true })

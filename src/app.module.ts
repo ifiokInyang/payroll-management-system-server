@@ -9,10 +9,10 @@ import { UsersModule } from './users/users.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'containers-us-west-156.railway.app',
-      port: 7868,
+      host: 'containers-us-west-74.railway.app',
+      port: 7477,
       username: 'root',
-      password: '3A6QDr0FevMDm9bkIkFC',
+      password: 'f2KTNA9NoWwsKPv4BFTu',
       database: 'railway',
       entities: [User],
       synchronize: true,

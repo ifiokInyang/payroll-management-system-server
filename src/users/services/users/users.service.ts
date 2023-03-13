@@ -43,26 +43,21 @@ export class UsersService {
     });
     const savedUser = await this.userRepository.save(newUser);
     const { password, ...newlySavedUser } = savedUser;
+    console.log('newly saved user is ', newlySavedUser);
     return newlySavedUser;
   }
 
   async updateUser(id: string, updateDetails: UpdateUserDetails) {
-    const isEmail = await this.userRepository.findOne({
+    const isUser = await this.userRepository.findOne({
       where: {
         id,
       },
     });
-    if (!isEmail)
+    if (!isUser)
       throw new HttpException(
         'user does not exist on our records',
         HttpStatus.BAD_REQUEST,
       );
-    if (isEmail.email === updateDetails.email) {
-      throw new HttpException(
-        'this email already exist',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
     await this.userRepository.update({ id }, { ...updateDetails });
 
     const isUpdatedUser = await this.userRepository.findOne({
