@@ -80,7 +80,10 @@ export class UsersService {
       },
     });
     if (!isUser)
-      throw new HttpException('user does not exist', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'user is an active staff or does not exist',
+        HttpStatus.BAD_REQUEST,
+      );
     await this.userRepository.delete(id);
     return { message: 'Successfully deleted user' };
   }
